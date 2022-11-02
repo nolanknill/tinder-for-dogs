@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Matches from "./components/Matches/Matches";
+import Candidate from "./components/Candidate/Candidate";
+import dogsJson from "./data/dogs.json";
 
 function App() {
+  const [matches, setMatches] = useState([]);
+  const [dogs, setDogs] = useState(dogsJson);
+
+  const rejectCandidate = (id) => {
+    const updatedCandidates = [...dogs].filter(dog => dog.id !== id);
+    
+    setDogs(updatedCandidates);
+  }
+
+  const matchCandidate = (id) => {
+    const matchedDog = dogs.find(dog => dog.id === id);
+    const updatedMatches = [matchedDog, ...matches];
+
+    setMatches(updatedMatches);
+    
+    rejectCandidate(id);
+  }
+
+  const candidateDog = dogs[0];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <Matches matches={matches} />
+
+      {candidateDog 
+        ? <Candidate 
+            dog={candidateDog}
+            rejectCandidate={() => rejectCandidate(candidateDog.id)}  
+            matchCandidate={() => matchCandidate(candidateDog.id)}
+            />
+        :
+          <p>There are no potential matches near you...</p>
+      }
+    </main>
   );
 }
 

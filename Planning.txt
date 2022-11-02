@@ -1,0 +1,54 @@
+App
+    
+    state: 
+        dogs
+        matches
+
+    updateDogs = [
+        remove dog after a decision has been made
+    ]
+
+    matches = [
+        add dog after an accept has happened!
+    ]
+
+    acceptCandidate(id)
+
+    rejectCandidate(id)
+    
+
+    Matches
+        - title
+        - number of matches
+        
+        Match
+            - name
+            - image
+    
+    Candidate
+        - Dog:
+            - Distance
+            - Name
+            - Age
+            - Slogan
+    
+    
+        - AcceptButton
+            - update dogs and matches state
+
+        - RejectButton
+            - update dogs state
+
+
+
+
+Header
+    - image
+    - location
+    - alarm bell
+
+Footer
+    - home
+    - heart
+    - messages
+    - settings
